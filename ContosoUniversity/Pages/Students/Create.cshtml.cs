@@ -10,11 +10,11 @@ using ContosoUniversity.Models;
 
 namespace ContosoUniversity.Pages.Students
 {
-    public class CreateVMModel : PageModel
+    public class CreateModel : PageModel
     {
         private readonly ContosoUniversity.Data.SchoolContext _context;
 
-        public CreateVMModel(ContosoUniversity.Data.SchoolContext context)
+        public CreateModel(ContosoUniversity.Data.SchoolContext context)
         {
             _context = context;
         }
@@ -25,7 +25,7 @@ namespace ContosoUniversity.Pages.Students
         }
 
         [BindProperty]
-        public StudentVM StudentVM { get; set; }
+        public Student Student { get; set; }
 
         public async Task<IActionResult> OnPostAsync()
         {
@@ -35,7 +35,7 @@ namespace ContosoUniversity.Pages.Students
             }
 
             var entry = _context.Add(new Student());
-            entry.CurrentValues.SetValues(StudentVM);
+            entry.CurrentValues.SetValues(Student);
             await _context.SaveChangesAsync();
             return RedirectToPage("./Index");
         }
